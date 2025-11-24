@@ -1,0 +1,82 @@
+.container {
+    padding: 16px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.header h2 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.deleteBtn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.emptyState {
+    padding: 32px;
+    text-align: center;
+    color: #6c757d;
+}
+
+.section {
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+}
+
+.section:last-child {
+    border-bottom: none;
+}
+
+.section label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6c757d;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.inputGroup {
+    display: flex;
+    align-items: center;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 8px;
+    flex: 1;
+}
+
+.inputGroup span {
+    font-size: 12px;
+    color: #6c757d;
+    margin-right: 8px;
+}
+
+.inputGroup input {
+    width: 100%;
+    font-size: 12px;
+    flex: 1;
+}
+
+button:hover {
+    background: var(--background);
+}

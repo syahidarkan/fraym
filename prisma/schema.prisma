@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  pages     Page[]
+}
+
+model Page {
+  id        String    @id @default(cuid())
+  name      String
+  order     Int       @default(0)
+  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String
+  elements  Element[]
+}
+
+model Element {
+  id        String  @id @default(cuid())
+  type      String
+  x         Float
+  y         Float
+  width     Float
+  height    Float
+  content   String?
+  props     String  @default("{}") // JSON string
+  zIndex    Int     @default(0)
+  parentId  String? // For grouping
+  page      Page    @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  pageId    String
+}
