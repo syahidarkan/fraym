@@ -431,7 +431,7 @@ export default function FigmaStyleToolbar({
             </div>
 
             {/* Modals */}
-            {showSettingsModal && <SettingsModal onClose={() => setShowSettingsModal(false)} />}
+            {showSettingsModal && <SettingsModal isOpen={showSettingsModal} onClose={() => setShowSettingsModal(false)} />}
             {showAccountModal && <AccountSettingsModal onClose={() => setShowAccountModal(false)} />}
             {showScannerModal && <WireframeScanner onClose={() => setShowScannerModal(false)} />}
         </div>

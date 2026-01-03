@@ -3,7 +3,7 @@ import { db } from '@/lib/server/db';
 
 export async function GET() {
     try {
-        const users = db.users.getAll();
+        const users = await db.users.getAll();
         // Remove passwords
         const safeUsers = users.map(({ password, ...u }) => u);
         return NextResponse.json({ users: safeUsers });
@@ -21,7 +21,7 @@ export async function DELETE(request: Request) {
             return NextResponse.json({ error: 'Missing id' }, { status: 400 });
         }
 
-        db.users.delete(id);
+        await db.users.delete(id);
         return NextResponse.json({ success: true });
     } catch (error) {
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

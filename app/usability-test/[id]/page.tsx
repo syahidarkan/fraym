@@ -43,7 +43,7 @@ export default function UsabilityTestPage({ params }: PageProps) {
 
                 for (const p of projects) {
                     if (p.designThinking?.usabilityTests && p.designThinking.usabilityTests.length > 0) {
-                        const testInProject = p.designThinking.usabilityTests.find(t => t.id === id)
+                        const testInProject = p.designThinking.usabilityTests.find((t: any) => t.id === id)
                         if (testInProject) {
                             foundTest = testInProject
                             foundProject = p

@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic'
 
 // Generate static params for all pages
 export async function generateStaticParams() {
-    const pages = db.pages.getAll()
+    const pages = await db.pages.getAll()
     return pages.map((page) => ({
         slug: page.slug,
     }))
@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 
 export default async function DynamicPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
-    const page = db.pages.getBySlug(slug)
+    const page = await db.pages.getBySlug(slug)
 
     if (!page) {
         notFound()

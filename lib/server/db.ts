@@ -71,6 +71,7 @@ export const db = {
             const users = await prisma.user.findMany();
             return users.map(u => ({
                 ...u,
+                role: u.role as 'user' | 'admin',
                 createdAt: u.createdAt.toISOString(),
                 updatedAt: u.updatedAt.toISOString()
             }));
@@ -80,6 +81,7 @@ export const db = {
             if (!user) return null;
             return {
                 ...user,
+                role: user.role as 'user' | 'admin',
                 createdAt: user.createdAt.toISOString(),
                 updatedAt: user.updatedAt.toISOString()
             };
@@ -89,6 +91,7 @@ export const db = {
             if (!user) return null;
             return {
                 ...user,
+                role: user.role as 'user' | 'admin',
                 createdAt: user.createdAt.toISOString(),
                 updatedAt: user.updatedAt.toISOString()
             };
@@ -232,6 +235,7 @@ export const db = {
             });
             return notifications.map(n => ({
                 ...n,
+                type: n.type as 'info' | 'warning' | 'success',
                 createdAt: n.createdAt.toISOString(),
                 targetUserId: n.targetUserId || undefined
             }));
@@ -248,6 +252,7 @@ export const db = {
             });
             return {
                 ...created,
+                type: created.type as 'info' | 'warning' | 'success',
                 createdAt: created.createdAt.toISOString(),
                 targetUserId: created.targetUserId || undefined
             };

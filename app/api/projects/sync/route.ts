@@ -10,7 +10,7 @@ export async function POST(request: Request) {
         }
 
         // Check if project exists
-        const existing = db.projects.getById(project.id);
+        const existing = await db.projects.getById(project.id);
 
         const projectData = {
             id: project.id,
@@ -23,9 +23,9 @@ export async function POST(request: Request) {
         };
 
         if (existing) {
-            db.projects.update(project.id, projectData);
+            await db.projects.update(project.id, projectData);
         } else {
-            db.projects.create(projectData);
+            await db.projects.create(projectData);
         }
 
         return NextResponse.json({ success: true });

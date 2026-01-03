@@ -76,11 +76,11 @@ const defaultSections = [
     }
 ];
 
-export default function LandingPage() {
+export default async function LandingPage() {
     // Fetch content from DB (Server Side)
     let sections = defaultSections;
     try {
-        const dbPage = db.pages.getBySlug('landing');
+        const dbPage = await db.pages.getBySlug('landing');
         if (dbPage && dbPage.sections && dbPage.sections.length > 0) {
             sections = dbPage.sections.sort((a, b) => a.order - b.order);
         }

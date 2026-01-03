@@ -4,7 +4,7 @@ import { db } from '@/lib/server/db';
 export async function GET(request: Request, { params }: { params: Promise<{ slug: string }> }) {
     try {
         const { slug } = await params;
-        const page = db.pages.getBySlug(slug);
+        const page = await db.pages.getBySlug(slug);
         if (!page) {
             return NextResponse.json({ error: 'Page not found' }, { status: 404 });
         }
@@ -24,7 +24,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ slu
             return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
         }
 
-        const updatedPage = db.pages.save({
+        const updatedPage = await db.pages.save({
             slug: slug,
             title,
             sections,
@@ -40,9 +40,9 @@ export async function POST(request: Request, { params }: { params: Promise<{ slu
 export async function DELETE(request: Request, { params }: { params: Promise<{ slug: string }> }) {
     try {
         const { slug } = await params;
-        const data = db.getDB();
+        const data = await db.getDB();
         data.pages = data.pages.filter(p => p.slug !== slug);
-        db.saveDB(data);
+        await db.saveDB(data);
         return NextResponse.json({ success: true });
     } catch (error) {
         return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

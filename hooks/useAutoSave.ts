@@ -25,7 +25,7 @@ export function useAutoSave(projectId: string, pageId: string) {
                 // Fetch current project state
                 const project = await apiStorage.getProject(projectId)
                 if (project) {
-                    const pageIndex = project.pages.findIndex(p => p.id === pageId)
+                    const pageIndex = project.pages.findIndex((p: any) => p.id === pageId)
                     if (pageIndex !== -1) {
                         project.pages[pageIndex].elements = elementsList
                         // Optimistic update: set updatedAt
