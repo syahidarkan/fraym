@@ -1,19 +1,81 @@
-.canvasContainer {
-    position: relative;
+/* Professional Canvas */
+.canvas {
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    position: relative;
     overflow: hidden;
-    background-color: var(--background);
-    user-select: none;
+    background: #ffffff;
+}
+
+.canvasContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
 .gridBackground {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(var(--grid-color) 1px, transparent 1px);
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(#e4e4e7 1px, transparent 1px);
     background-size: 20px 20px;
     pointer-events: none;
+}
+
+.zoomControls {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    padding: 6px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.zoomBtn {
+    padding: 8px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: #71717a;
+    cursor: pointer;
+    transition: all 150ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zoomBtn:hover {
+    background: #f4f4f5;
+    color: #18181b;
+}
+
+.zoomValue {
+    padding: 0 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #18181b;
+    display: flex;
+    align-items: center;
+}
+
+.element {
+    position: absolute;
+    cursor: move;
+    border: 1px solid transparent;
+    transition: border-color 150ms;
+}
+
+.element:hover {
+    border-color: #d4d4d8;
+}
+
+.element.selected {
+    border-color: #18181b;
+    box-shadow: 0 0 0 2px rgba(24, 24, 27, 0.1);
 }

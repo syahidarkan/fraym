@@ -1,0 +1,80 @@
+/* Professional Floating Shapes */
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.shape {
+    position: absolute;
+    opacity: 0.6;
+    animation: float 20s infinite linear;
+}
+
+.shape svg {
+    color: #e4e4e7;
+    transition: color 0.3s ease;
+}
+
+.shape:hover svg {
+    color: #d4d4d8;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(10px, 10px) rotate(5deg);
+    }
+
+    50% {
+        transform: translate(0, 20px) rotate(0deg);
+    }
+
+    75% {
+        transform: translate(-10px, 10px) rotate(-5deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+/* Specific Shapes Positioning */
+.shape1 {
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.shape2 {
+    top: 20%;
+    right: 15%;
+    animation-delay: -5s;
+}
+
+.shape3 {
+    bottom: 15%;
+    left: 20%;
+    animation-delay: -10s;
+}
+
+.shape4 {
+    bottom: 25%;
+    right: 10%;
+    animation-delay: -15s;
+}
+
+.shape5 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -2s;
+}

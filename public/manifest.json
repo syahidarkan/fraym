@@ -1,0 +1,17 @@
+{
+    "name": "Fraym - Professional Design Tool",
+    "short_name": "Fraym",
+    "description": "Create professional wireframes, diagrams, and design thinking workflows with ease",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#18181b",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/favicon.ico",
+            "sizes": "48x48",
+            "type": "image/x-icon"
+        }
+    ]
+}

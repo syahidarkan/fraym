@@ -1,0 +1,50 @@
+.node {
+    padding: 12px 20px;
+    border: 2px solid #1e1b4b;
+    background: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e1b4b;
+    box-shadow: 4px 4px 0 rgba(30, 27, 75, 0.1);
+    transition: all 0.2s;
+    min-width: 120px;
+    text-align: center;
+}
+
+.node:hover {
+    box-shadow: 6px 6px 0 rgba(30, 27, 75, 0.2);
+}
+
+.rectangle {
+    border-radius: 0;
+}
+
+.diamond {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    transform: rotate(45deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.diamond .label {
+    transform: rotate(-45deg);
+}
+
+.circle {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.label {
+    word-wrap: break-word;
+    user-select: none;
+}

@@ -1,0 +1,443 @@
+/* Professional Interview Builder */
+.listView,
+.detailView,
+.editor {
+    padding: 32px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+}
+
+.listHeader,
+.detailHeader,
+.editorHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.listHeader h3,
+.editorHeader h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.detailActions,
+.editorActions {
+    display: flex;
+    gap: 12px;
+}
+
+.btnPrimary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #18181b;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 150ms;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btnPrimary:hover {
+    background: #27272a;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.btnSecondary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #ffffff;
+    color: #18181b;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 150ms;
+}
+
+.btnSecondary:hover {
+    background: #fafafa;
+    border-color: #d4d4d8;
+}
+
+.btnBack {
+    background: transparent;
+    border: none;
+    color: #71717a;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0;
+    transition: all 150ms;
+}
+
+.btnBack:hover {
+    color: #18181b;
+    text-decoration: underline;
+}
+
+.btnDanger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: #ffffff;
+    color: #ef4444;
+    border: 1px solid #fee2e2;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 150ms;
+}
+
+.btnDanger:hover {
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+/* Interview Grid */
+.interviewGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.interviewCard {
+    background: #ffffff;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 150ms;
+}
+
+.interviewCard:hover {
+    border-color: #d4d4d8;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.interviewCard h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0 0 8px 0;
+}
+
+.cardDescription {
+    font-size: 14px;
+    color: #71717a;
+    margin: 0 0 16px 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cardStats {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: #a1a1aa;
+    border-top: 1px solid #f4f4f5;
+    padding-top: 16px;
+}
+
+/* Editor */
+.editorContent {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.formGroup {
+    margin-bottom: 24px;
+}
+
+.formGroup label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #18181b;
+    margin-bottom: 8px;
+}
+
+.input,
+.textarea,
+.select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #18181b;
+    background: #ffffff;
+    transition: all 150ms;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+    outline: none;
+    border-color: #18181b;
+    box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.05);
+}
+
+.questionsSection {
+    margin-top: 40px;
+    border-top: 1px solid #e4e4e7;
+    padding-top: 32px;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.sectionHeader h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0;
+}
+
+.questionCard {
+    background: #fafafa;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.questionHeader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.questionNumber {
+    font-size: 14px;
+    font-weight: 600;
+    color: #71717a;
+    width: 30px;
+}
+
+.btnIcon {
+    padding: 8px;
+    background: transparent;
+    border: none;
+    color: #71717a;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 150ms;
+    margin-left: auto;
+}
+
+.btnIcon:hover {
+    background: #fee2e2;
+    color: #ef4444;
+}
+
+.optionsSection {
+    margin-top: 16px;
+    padding-left: 12px;
+    border-left: 2px solid #e4e4e7;
+}
+
+.smallLabel {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #71717a;
+    margin-bottom: 8px;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 14px;
+    color: #18181b;
+    cursor: pointer;
+}
+
+/* Detail View */
+.detailContent {
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.detailContent h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0 0 8px 0;
+}
+
+.description {
+    font-size: 16px;
+    color: #71717a;
+    margin: 0 0 32px 0;
+    line-height: 1.6;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.statCard {
+    background: #ffffff;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+.statValue {
+    font-size: 24px;
+    font-weight: 600;
+    color: #18181b;
+    margin-bottom: 4px;
+}
+
+.statLabel {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #71717a;
+    font-weight: 600;
+}
+
+.shareSection {
+    background: #f4f4f5;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 40px;
+}
+
+.shareSection h4 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #18181b;
+}
+
+.shareLink {
+    display: flex;
+    gap: 12px;
+}
+
+.responsesSection h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0 0 24px 0;
+}
+
+.responseCard {
+    background: #ffffff;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 16px;
+}
+
+.responseHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f4f4f5;
+}
+
+.responseNumber {
+    font-weight: 600;
+    color: #18181b;
+}
+
+.responseDate {
+    color: #71717a;
+    font-size: 14px;
+}
+
+.respondentInfo {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #18181b;
+}
+
+.answer {
+    margin-bottom: 20px;
+}
+
+.answer:last-child {
+    margin-bottom: 0;
+}
+
+.answerQuestion {
+    font-size: 13px;
+    font-weight: 600;
+    color: #71717a;
+    margin-bottom: 6px;
+}
+
+.answerValue {
+    font-size: 15px;
+    color: #18181b;
+    line-height: 1.5;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 64px 0;
+    color: #71717a;
+}
+
+.emptyState svg {
+    color: #d4d4d8;
+    margin-bottom: 16px;
+}
+
+.emptyState h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0 0 8px 0;
+}
+
+.emptyState p {
+    font-size: 14px;
+    color: #71717a;
+    margin: 0 0 24px 0;
+}
+
+.emptyHint {
+    font-size: 13px;
+    color: #a1a1aa;
+    font-style: italic;
+}

@@ -1,0 +1,380 @@
+﻿/* Dashboard Styles - Brutalist Professional Theme */
+
+.container {
+    display: flex;
+    height: 100vh;
+    background: #ffffff;
+    color: #1e1b4b;
+    font-family: 'Inter', sans-serif;
+    background-image:
+        linear-gradient(to right, rgba(30, 27, 75, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(30, 27, 75, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 280px;
+    background: white;
+    border-right: 2px solid #1e1b4b;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    margin-bottom: 32px;
+}
+
+.profile:hover {
+    background: #f3f4f6;
+    border-color: #1e1b4b;
+    box-shadow: 4px 4px 0 rgba(30, 27, 75, 0.1);
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background: #1e1b4b;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 16px;
+    border: 2px solid #1e1b4b;
+}
+
+.profileInfo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e1b4b;
+}
+
+.profileDropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 2px solid #1e1b4b;
+    box-shadow: 6px 6px 0 rgba(30, 27, 75, 0.1);
+    padding: 8px;
+    z-index: 10;
+}
+
+.profileDropdown button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: none;
+    background: none;
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.profileDropdown button:hover {
+    background: #1e1b4b;
+    color: white;
+}
+
+.sidebarSearch {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: white;
+    border: 2px solid #1e1b4b;
+    margin-bottom: 32px;
+    color: #1e1b4b;
+    box-shadow: 4px 4px 0 rgba(30, 27, 75, 0.1);
+}
+
+.sidebarSearch input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #1e1b4b;
+}
+
+.sidebarSearch input::placeholder {
+    color: #9ca3af;
+}
+
+.mainNav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.navItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 2px solid transparent;
+    background: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.navItem:hover {
+    color: #1e1b4b;
+    background: #f3f4f6;
+    border-color: #1e1b4b;
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 rgba(30, 27, 75, 0.1);
+}
+
+.navItem.active {
+    background: #1e1b4b;
+    color: white;
+    border-color: #1e1b4b;
+    box-shadow: 4px 4px 0 rgba(30, 27, 75, 0.2);
+}
+
+.teamSection {
+    margin-bottom: 40px;
+}
+
+.teamHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    margin-bottom: 16px;
+}
+
+.teamName {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1e1b4b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.teamName span:first-child {
+    width: 24px;
+    height: 24px;
+    background: #1e1b4b;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    border: 2px solid #1e1b4b;
+}
+
+.teamNav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.teamNavItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 2px solid transparent;
+    background: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.teamNavItem:hover {
+    color: #1e1b4b;
+    background: #f3f4f6;
+    border-color: #1e1b4b;
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 rgba(30, 27, 75, 0.1);
+}
+
+.teamNavItem.active {
+    background: #1e1b4b;
+    color: white;
+    border-color: #1e1b4b;
+    box-shadow: 4px 4px 0 rgba(30, 27, 75, 0.2);
+}
+
+.starred h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: #1e1b4b;
+    margin: 0 0 16px 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.starredItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 2px solid transparent;
+    background: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.starredItem:hover {
+    color: #1e1b4b;
+    background: #f3f4f6;
+    border-color: #1e1b4b;
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 rgba(30, 27, 75, 0.1);
+}
+
+.starredItem.active {
+    background: #1e1b4b;
+    color: white;
+    border-color: #1e1b4b;
+    box-shadow: 4px 4px 0 rgba(30, 27, 75, 0.2);
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.topNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #1e1b4b;
+    padding-bottom: 24px;
+}
+
+.topNavLeft {
+    display: flex;
+    gap: 32px;
+}
+
+.topNavTab {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: none;
+    border: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 8px 0;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.topNavTab:hover {
+    color: #1e1b4b;
+}
+
+.topNavTab.active {
+    color: #1e1b4b;
+}
+
+.topNavTab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -26px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #1e1b4b;
+}
+
+.topNavRight {
+    display: flex;
+    gap: 16px;
+}
+
+.newProjectBtn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    background: #1e1b4b;
+    color: white;
+    border: 2px solid #1e1b4b;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 4px 4px 0 rgba(30, 27, 75, 0.2);
+}
+
+.newProjectBtn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(30, 27, 75, 0.3);
+}
+
+.newDTBtn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    background: white;
+    color: #1e1b4b;
+    border: 2px solid #1e1b4b;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 4px 4px 0 rgba(30, 27, 75, 0.1);
+}
+
+.newDTBtn:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 rgba(30, 27, 75, 0.2);
+    background: #f3f4f6;
+}
+
+background: white;

@@ -1,40 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String    @id @default(cuid())
+  name      String
+  email     String    @unique
+  password  String
+  role      String    @default("user")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  projects  Project[]
 }
 
 model Project {
   id        String   @id @default(cuid())
   name      String
+  type      String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  data      String   @default("{}")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  pages     Page[]
 }
 
-model Page {
-  id        String    @id @default(cuid())
-  name      String
-  order     Int       @default(0)
-  project   Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId String
-  elements  Element[]
-}
-
-model Element {
-  id        String  @id @default(cuid())
-  type      String
-  x         Float
-  y         Float
-  width     Float
-  height    Float
-  content   String?
-  props     String  @default("{}") // JSON string
-  zIndex    Int     @default(0)
-  parentId  String? // For grouping
-  page      Page    @relation(fields: [pageId], references: [id], onDelete: Cascade)
-  pageId    String
+model Notification {
+  id           String   @id @default(cuid())
+  title        String
+  message      String
+  type         String   @default("info")
+  targetUserId String?
+  createdAt    DateTime @default(now())
 }

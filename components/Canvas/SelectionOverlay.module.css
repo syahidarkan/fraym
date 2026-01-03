@@ -1,40 +1,97 @@
-.overlay {
+/* Professional Selection Overlay */
+.selectionBox {
     position: absolute;
-    border: 2px solid var(--selection-border);
-    pointer-events: all;
-    cursor: move;
-    z-index: 1000;
+    border: 2px solid #18181b;
+    background: rgba(24, 24, 27, 0.05);
+    pointer-events: none;
+    z-index: 100;
+}
+
+.resizeHandles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
 }
 
 .handle {
     position: absolute;
     width: 10px;
     height: 10px;
-    background: white;
-    border: 1px solid var(--selection-border);
-    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #18181b;
+    border-radius: 2px;
+    pointer-events: auto;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.nw {
-    top: -6px;
-    left: -6px;
-    cursor: nw-resize;
+.handle.topLeft {
+    top: -5px;
+    left: -5px;
+    cursor: nwse-resize;
 }
 
-.ne {
-    top: -6px;
-    right: -6px;
-    cursor: ne-resize;
+.handle.topRight {
+    top: -5px;
+    right: -5px;
+    cursor: nesw-resize;
 }
 
-.sw {
-    bottom: -6px;
-    left: -6px;
-    cursor: sw-resize;
+.handle.bottomLeft {
+    bottom: -5px;
+    left: -5px;
+    cursor: nesw-resize;
 }
 
-.se {
-    bottom: -6px;
-    right: -6px;
-    cursor: se-resize;
+.handle.bottomRight {
+    bottom: -5px;
+    right: -5px;
+    cursor: nwse-resize;
+}
+
+.handle.topCenter {
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: ns-resize;
+}
+
+.handle.bottomCenter {
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: ns-resize;
+}
+
+.handle.leftCenter {
+    left: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: ew-resize;
+}
+
+.handle.rightCenter {
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: ew-resize;
+}
+
+.sizeLabel {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #18181b;
+    color: #ffffff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

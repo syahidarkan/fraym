@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /admin/
+
+# Disallow user-specific pages
+Disallow: /dashboard
+Disallow: /project/
+Disallow: /design-thinking/
+Disallow: /diagram/
+Disallow: /interview/
+Disallow: /usability-test/
+
+# Allow public pages
+Allow: /landing
+Allow: /about
+Allow: /features
+Allow: /pricing
+Allow: /resources
+Allow: /guide
+Allow: /login
+Allow: /register
+
+# Sitemap
+Sitemap: https://yourdomain.com/sitemap.xml

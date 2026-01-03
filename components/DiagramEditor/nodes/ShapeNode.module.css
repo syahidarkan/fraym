@@ -1,0 +1,75 @@
+.node {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-width: 50px;
+    min-height: 50px;
+}
+
+.svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    fill: white;
+    stroke: #1e1b4b;
+    stroke-width: 2px;
+    z-index: 0;
+    filter: drop-shadow(4px 4px 0 rgba(30, 27, 75, 0.1));
+    transition: filter 0.2s, stroke 0.2s;
+    overflow: visible;
+}
+
+.node:hover .svg {
+    filter: drop-shadow(6px 6px 0 rgba(30, 27, 75, 0.2));
+    stroke: #4f46e5;
+}
+
+.selected .svg {
+    stroke: #4f46e5;
+    stroke-width: 3px;
+    filter: drop-shadow(6px 6px 0 rgba(79, 70, 229, 0.2));
+}
+
+.labelContainer {
+    position: relative;
+    z-index: 1;
+    padding: 8px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.label {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1e1b4b;
+    text-align: center;
+    word-wrap: break-word;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: hidden;
+}
+
+.handle {
+    width: 8px !important;
+    height: 8px !important;
+    background: #1e1b4b !important;
+    border: 2px solid white !important;
+    opacity: 0;
+    transition: opacity 0.2s;
+    z-index: 10;
+}
+
+.node:hover .handle,
+.selected .handle {
+    opacity: 1;
+}

@@ -1,0 +1,334 @@
+/* Professional Figma-Style Toolbar */
+.container {
+    height: 56px;
+    background: #ffffff;
+    border-bottom: 1px solid #e4e4e7;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    position: relative;
+    z-index: 10;
+}
+
+.leftSection {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.menuButton {
+    padding: 8px;
+    background: #18181b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 150ms;
+}
+
+.menuButton:hover {
+    background: #27272a;
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    background: #ffffff;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    min-width: 200px;
+    padding: 6px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.dropdownMenu button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    width: 100%;
+    text-align: left;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #18181b;
+    cursor: pointer;
+    transition: all 150ms;
+}
+
+.dropdownMenu button:hover {
+    background: #f4f4f5;
+}
+
+.divider {
+    height: 1px;
+    background: #e4e4e7;
+    margin: 4px 0;
+}
+
+.separator {
+    width: 1px;
+    height: 24px;
+    background: #e4e4e7;
+    margin: 0 4px;
+}
+
+.tools {
+    display: flex;
+    background: #f4f4f5;
+    border-radius: 8px;
+    padding: 4px;
+    gap: 2px;
+}
+
+.tool {
+    padding: 6px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: #71717a;
+    cursor: pointer;
+    transition: all 150ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tool:hover {
+    background: rgba(255, 255, 255, 0.8);
+    color: #18181b;
+}
+
+.tool.active {
+    background: #ffffff;
+    color: #18181b;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.centerSection {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.actionToolbar {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    padding: 4px;
+    gap: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.actionGroup {
+    display: flex;
+    gap: 2px;
+}
+
+.actionButton {
+    padding: 6px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: #71717a;
+    cursor: pointer;
+    transition: all 150ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionButton:hover {
+    background: #f4f4f5;
+    color: #18181b;
+}
+
+.projectName {
+    display: flex;
+    align-items: center;
+}
+
+.projectButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #18181b;
+    cursor: pointer;
+    transition: all 150ms;
+}
+
+.projectButton:hover {
+    background: #f4f4f5;
+}
+
+.renameInput {
+    padding: 6px 12px;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #18181b;
+    outline: none;
+}
+
+.renameInput:focus {
+    border-color: #18181b;
+}
+
+.rightSection {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.exportButton {
+    padding: 8px 16px;
+    background: #18181b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 150ms;
+}
+
+.exportButton:hover {
+    background: #27272a;
+    transform: translateY(-1px);
+}
+
+.previewButton {
+    padding: 8px;
+    background: transparent;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+    color: #18181b;
+    cursor: pointer;
+    transition: all 150ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.previewButton:hover {
+    background: #f4f4f5;
+    border-color: #d4d4d8;
+}
+
+.profileButton {
+    padding: 8px;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    color: #71717a;
+    cursor: pointer;
+    transition: all 150ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid transparent;
+}
+
+.profileButton:hover {
+    background: #f4f4f5;
+    color: #18181b;
+}
+
+.profileInfo {
+    padding: 12px;
+    background: #f9fafb;
+    border-radius: 6px 6px 0 0;
+    margin: -6px -6px 6px -6px;
+    border-bottom: 1px solid #e4e4e7;
+}
+
+.profileName {
+    font-size: 14px;
+    font-weight: 600;
+    color: #18181b;
+}
+
+.profileEmail {
+    font-size: 12px;
+    color: #71717a;
+}
+
+.zoom {
+    display: flex;
+    align-items: center;
+    background: #f4f4f5;
+    border-radius: 6px;
+    padding: 2px;
+}
+
+.zoomButton {
+    padding: 4px;
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    color: #71717a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zoomButton:hover {
+    background: #ffffff;
+    color: #18181b;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.zoomPercent {
+    padding: 0 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #18181b;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    min-width: 48px;
+}
+
+@media (max-width: 768px) {
+    .centerSection {
+        display: none;
+    }
+
+    .rightSection {
+        gap: 8px;
+    }
+
+    .exportButton span {
+        display: none;
+    }
+}

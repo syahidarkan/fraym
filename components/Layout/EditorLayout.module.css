@@ -1,18 +1,111 @@
+/* Professional Editor Layout */
+.container {
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    background: #fafafa;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
+
+.topBar {
+    height: 56px;
+    background: #ffffff;
+    border-bottom: 1px solid #e4e4e7;
     z-index: 10;
-    }
+    flex-shrink: 0;
+}
 
-    .main {
-        flex: 1;
-        position: relative;
-        overflow: hidden;
-    }
+.workspace {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
 
-    .properties {
-        width: 280px;
-        border-left: 1px solid var(--border);
-        background: white;
-        z-index: 10;
-        overflow-y: auto;
-    }
+.leftSidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #ffffff;
+    border-right: 1px solid #e4e4e7;
+}
+
+.leftTabs {
+    display: flex;
+    border-bottom: 1px solid #e4e4e7;
+    background: #ffffff;
+}
+
+.tab {
+    flex: 1;
+    padding: 12px 4px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    font-size: 12px;
+    font-weight: 500;
+    color: #71717a;
+    cursor: pointer;
+    transition: all 150ms;
+}
+
+.tab:hover {
+    color: #18181b;
+    background: #fafafa;
+}
+
+.tab.active {
+    color: #18181b;
+    border-bottom-color: #18181b;
+    font-weight: 600;
+}
+
+.leftContent {
+    flex: 1;
+    overflow-y: auto;
+    background: #ffffff;
+}
+
+.canvasArea {
+    flex: 1;
+    position: relative;
+    background: #f4f4f5;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rightSidebar {
+    width: 280px;
+    background: #ffffff;
+    border-left: 1px solid #e4e4e7;
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+    flex-shrink: 0;
+}
+
+.exitPreviewButton {
+    position: absolute;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background: #18181b;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    transition: all 150ms;
+}
+
+.exitPreviewButton:hover {
+    background: #27272a;
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}

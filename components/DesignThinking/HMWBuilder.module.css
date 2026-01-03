@@ -1,0 +1,241 @@
+/* Professional Builder Component */
+.container {
+    padding: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.header h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btnPrimary,
+.btnSecondary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 150ms;
+}
+
+.btnPrimary {
+    background: #18181b;
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btnPrimary:hover {
+    background: #27272a;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.btnSecondary {
+    background: #ffffff;
+    color: #18181b;
+    border: 1px solid #e4e4e7;
+}
+
+.btnSecondary:hover {
+    background: #fafafa;
+    border-color: #d4d4d8;
+}
+
+/* Content */
+.content {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Card */
+.card {
+    background: #ffffff;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 150ms;
+}
+
+.card:hover {
+    border-color: #d4d4d8;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.cardTitle {
+    font-size: 15px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0;
+}
+
+.cardActions {
+    display: flex;
+    gap: 6px;
+}
+
+.iconBtn {
+    padding: 6px;
+    border: none;
+    background: transparent;
+    color: #71717a;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 150ms;
+}
+
+.iconBtn:hover {
+    background: #f4f4f5;
+    color: #18181b;
+}
+
+/* Form Elements */
+.formGroup {
+    margin-bottom: 16px;
+}
+
+.label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #18181b;
+    margin-bottom: 6px;
+}
+
+.input,
+.textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #18181b;
+    background: #ffffff;
+    font-family: inherit;
+    transition: all 150ms;
+}
+
+.input::placeholder,
+.textarea::placeholder {
+    color: #a1a1aa;
+}
+
+.input:hover,
+.textarea:hover {
+    border-color: #d4d4d8;
+}
+
+.input:focus,
+.textarea:focus {
+    outline: none;
+    border-color: #18181b;
+    box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.05);
+}
+
+.textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Empty State */
+.emptyState {
+    text-align: center;
+    padding: 60px 20px;
+    color: #71717a;
+}
+
+.emptyState svg {
+    color: #d4d4d8;
+    margin-bottom: 16px;
+}
+
+.emptyState h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0 0 6px 0;
+}
+
+.emptyState p {
+    font-size: 14px;
+    color: #71717a;
+    margin: 0 0 20px 0;
+}
+
+/* Grid Layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+/* List Layout */
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.listItem {
+    background: #ffffff;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 150ms;
+}
+
+.listItem:hover {
+    border-color: #d4d4d8;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.listItemContent {
+    flex: 1;
+}
+
+.listItemTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0 0 4px 0;
+}
+
+.listItemMeta {
+    font-size: 13px;
+    color: #71717a;
+}

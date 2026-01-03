@@ -1,0 +1,140 @@
+/* Professional Diagram Toolbar */
+.toolbar {
+    width: 260px;
+    background: #ffffff;
+    border-right: 1px solid #e4e4e7;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    padding: 16px;
+    border-bottom: 1px solid #f4f4f5;
+}
+
+.header h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0;
+}
+
+.scrollArea {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+.group {
+    margin-bottom: 16px;
+}
+
+.groupHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 8px 0;
+    cursor: pointer;
+    color: #71717a;
+    transition: all 150ms;
+}
+
+.groupHeader:hover {
+    color: #18181b;
+}
+
+.groupTitle {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.shapes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 8px;
+    animation: slideDown 200ms ease-out;
+}
+
+.shapeBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 4px;
+    background: #fafafa;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 150ms;
+    gap: 8px;
+}
+
+.shapeBtn:hover {
+    background: #ffffff;
+    border-color: #d4d4d8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
+}
+
+.shapeIcon {
+    color: #52525b;
+}
+
+.shapeBtn:hover .shapeIcon {
+    color: #18181b;
+}
+
+.shapeLabel {
+    font-size: 10px;
+    color: #71717a;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.section {
+    padding: 16px;
+    border-top: 1px solid #f4f4f5;
+    background: #fafafa;
+}
+
+.section h4 {
+    font-size: 12px;
+    font-weight: 600;
+    color: #71717a;
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+}
+
+.connector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: #71717a;
+    padding: 8px;
+    background: #ffffff;
+    border: 1px solid #e4e4e7;
+    border-radius: 6px;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

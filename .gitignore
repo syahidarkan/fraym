@@ -40,4 +40,38 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# database (now using cloud PostgreSQL)
+.data/
+data.db*
+*.db
+*.db-shm
+*.db-wal
+
+# build logs
+build-*.log
+*_log.txt
+
+# prisma
 /lib/generated/prisma
+
+# AI tools
+.agent/
+.claude/
+
+# temporary files
+*.log
+nul
+test-*.js
+
+# documentation (keep only README)
+CHANGELOG.md
+DATABASE.md
+DEPLOYMENT*.md
+MIGRATION*.md
+OAUTH*.md
+*_CHECKLIST.md
+*_READY.md
+*_SETUP.md
+*_MIGRATION.md
+QUICK_*.md
+HYBRID_*.md

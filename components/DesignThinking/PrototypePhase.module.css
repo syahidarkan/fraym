@@ -1,0 +1,117 @@
+/* Professional Prototype Phase */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.header {
+    margin-bottom: 32px;
+}
+
+.header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0 0 6px 0;
+    letter-spacing: -0.025em;
+}
+
+.header p {
+    font-size: 15px;
+    color: #71717a;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.comingSoon {
+    background: #ffffff;
+    border: 2px dashed #e4e4e7;
+    border-radius: 12px;
+    padding: 64px 40px;
+    text-align: center;
+}
+
+.comingSoon h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.02em;
+}
+
+.comingSoon p {
+    font-size: 15px;
+    color: #71717a;
+    margin: 0;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #e4e4e7;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    max-width: 480px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: all 200ms;
+}
+
+.card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.card svg {
+    color: #71717a;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #18181b;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.02em;
+}
+
+.card p {
+    font-size: 15px;
+    color: #71717a;
+    margin: 0 0 24px 0;
+    line-height: 1.625;
+}
+
+.btnPrimary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #18181b;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 150ms;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btnPrimary:hover {
+    background: #27272a;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.btnPrimary:active {
+    transform: translateY(0);
+}

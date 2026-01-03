@@ -1,0 +1,458 @@
+'use client'
+
+import React, { useEffect, useState, useRef } from 'react'
+import { useRouter } from 'next/navigation'
+import {
+    Plus, FileText, Search, ChevronDown, Star,
+    Folder, Trash2, MoreVertical, Clock, Home,
+    LogOut, Settings as SettingsIcon,
+    Edit2, Copy, Trash, RotateCcw, BrainCircuit, Network, Layout, Lightbulb, Share2, X
+} from 'lucide-react'
+import styles from './Dashboard.module.css'
+import { storage, Project, ProjectType } from '@/lib/storage'
+import { hybridStorage } from '@/lib/hybridStorage'
+import SettingsModal from '@/components/Modals/SettingsModal'
+import NewProjectModal from '@/components/Modals/NewProjectModal'
+
+type SidebarFilter = 'all' | 'drafts' | 'trash' | 'starred'
+type SortBy = 'lastViewed' | 'lastModified' | 'name'
+
+export default function Dashboard() {
+    const [projects, setProjects] = useState<Project[]>([])
+    const [filteredProjects, setFilteredProjects] = useState<Project[]>([])
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [searchQuery, setSearchQuery] = useState('')
+    const [sidebarFilter, setSidebarFilter] = useState<SidebarFilter>('all')
+    const [sortBy, setSortBy] = useState<SortBy>('lastModified')
+    const [profileDropdownOpen, setProfileDropdownOpen] = useState(false)
+    const [activeProjectMenu, setActiveProjectMenu] = useState<string | null>(null)
+
+    // Modal States
+    const [renameModalOpen, setRenameModalOpen] = useState(false)
+    const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+    const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+    const [newName, setNewName] = useState('')
+    const [showSettings, setShowSettings] = useState(false)
+
+    const router = useRouter()
+    const menuRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        loadProjects()
+
+        // Close menu when clicking outside
+        const handleClickOutside = (event: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                setActiveProjectMenu(null)
+        )
+
+    if (sidebarFilter === 'drafts') {
+        filtered = filtered.filter(p => p.draft && !p.deleted)
+    } else if (sidebarFilter === 'trash') {
+        filtered = filtered.filter(p => p.deleted)
+    } else if (sidebarFilter === 'starred') {
+        filtered = filtered.filter(p => p.starred && !p.deleted)
+    } else {
+        filtered = filtered.filter(p => !p.deleted)
+    }
+
+    filtered = filtered.sort((a, b) => {
+        if (sortBy === 'lastModified' || sortBy === 'lastViewed') {
+            return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+        } else {
+            return a.name.localeCompare(b.name)
+        }
+    })
+
+    setFilteredProjects(filtered)
+}, [searchQuery, projects, sidebarFilter, sortBy])
+
+const createProject = async (name: string, type: ProjectType) => {
+    if (!name.trim() || !type) return
+
+    try {
+        // Try API first
+        const newProject = await apiStorage.createProject(name, type, {})
+        if (newProject) {
+            await loadProjects()
+            setIsModalOpen(false)
+            navigateToProject(newProject)
+            return
+        }
+    } catch (error) {
+        console.error('API create failed, using localStorage:', error)
+    }
+
+    // Fallback to localStorage
+    const newProject = storage.createProject(name, type)
+    storage.saveProject(newProject)
+    await loadProjects()
+    setIsModalOpen(false)
+    navigateToProject(newProject)
+}
+
+const navigateToProject = (project: Project) => {
+    if (project.type === 'WIREFRAME') {
+        router.push(`/project/${project.id}`)
+    } else if (project.type === 'DESIGN_THINKING') {
+        router.push(`/design-thinking/${project.id}`)
+    } else if (project.type === 'DIAGRAM') {
+        router.push(`/diagram/${project.id}`)
+    }
+}
+
+const handleLogout = () => {
+    router.push('/login')
+}
+
+const handleCardClick = (project: Project) => {
+    if (project.deleted) return;
+    navigateToProject(project)
+}
+
+const getProjectIcon = (type: ProjectType) => {
+    switch (type) {
+        case 'WIREFRAME': return <Layout size={20} />;
+        case 'DESIGN_THINKING': return <Lightbulb size={20} />;
+        case 'DIAGRAM': return <Share2 size={20} />;
+        default: return <FileText size={20} />;
+    }
+}
+
+// Project Actions
+const handleRename = (project: Project) => {
+    setSelectedProject(project)
+    setNewName(project.name)
+    setRenameModalOpen(true)
+    setActiveProjectMenu(null)
+}
+
+const confirmRename = async () => {
+    if (selectedProject && newName.trim()) {
+        const updatedProject = { ...selectedProject, name: newName, updatedAt: new Date().toISOString() }
+        try {
+            const result = await apiStorage.updateProject(selectedProject.id, updatedProject)
+            if (!result) storage.saveProject(updatedProject)
+        } catch (error) {
+            storage.saveProject(updatedProject)
+        }
+        await loadProjects()
+        setRenameModalOpen(false)
+        setSelectedProject(null)
+    }
+}
+
+const handleDelete = (project: Project) => {
+    setSelectedProject(project)
+    setDeleteModalOpen(true)
+    setActiveProjectMenu(null)
+}
+
+const confirmDelete = async () => {
+    if (selectedProject) {
+        try {
+            if (selectedProject.deleted) {
+                // Permanent delete - try API first
+                const success = await apiStorage.deleteProject(selectedProject.id)
+                if (!success) {
+                    // Fallback to localStorage
+                    storage.deleteProject(selectedProject.id)
+                }
+            } else {
+                // Move to trash - try API first
+                const updatedProject = { ...selectedProject, deleted: true, updatedAt: new Date().toISOString() }
+                const result = await apiStorage.updateProject(selectedProject.id, updatedProject)
+                if (!result) {
+                    // Fallback to localStorage
+                    storage.saveProject(updatedProject)
+                }
+            }
+        } catch (error) {
+            console.error('API delete/update failed, using localStorage:', error)
+            // Fallback to localStorage on error
+            if (selectedProject.deleted) {
+                storage.deleteProject(selectedProject.id)
+            } else {
+                const updatedProject = { ...selectedProject, deleted: true, updatedAt: new Date().toISOString() }
+                storage.saveProject(updatedProject)
+            }
+        }
+
+        await loadProjects()
+        setDeleteModalOpen(false)
+        setSelectedProject(null)
+    }
+}
+
+const handleDuplicate = async (project: Project) => {
+    const newProject = {
+        ...project,
+        id: crypto.randomUUID(),
+        name: `${project.name} (Copy)`,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+    }
+    try {
+        const result = await apiStorage.createProject(newProject.name, newProject.type, newProject)
+        if (!result) storage.saveProject(newProject)
+    } catch (error) {
+        storage.saveProject(newProject)
+    }
+    await loadProjects()
+    setActiveProjectMenu(null)
+}
+
+const handleToggleStar = async (project: Project) => {
+    const updatedProject = { ...project, starred: !project.starred }
+    try {
+        const result = await apiStorage.updateProject(project.id, updatedProject)
+        if (!result) storage.saveProject(updatedProject)
+    } catch (error) {
+        storage.saveProject(updatedProject)
+    }
+    await loadProjects()
+    setActiveProjectMenu(null)
+}
+
+const handleRestore = async (project: Project) => {
+    const updatedProject = { ...project, deleted: false, updatedAt: new Date().toISOString() }
+    try {
+        const result = await apiStorage.updateProject(project.id, updatedProject)
+        if (!result) storage.saveProject(updatedProject)
+    } catch (error) {
+        storage.saveProject(updatedProject)
+    }
+    await loadProjects()
+    setActiveProjectMenu(null)
+}
+
+const handleEmptyTrash = async () => {
+    if (confirm('Are you sure you want to permanently delete all items in trash?')) {
+        const trashProjects = projects.filter(p => p.deleted)
+        for (const p of trashProjects) {
+            try {
+                const success = await apiStorage.deleteProject(p.id)
+                if (!success) storage.deleteProject(p.id)
+            } catch (error) {
+                storage.deleteProject(p.id)
+            }
+        }
+        await loadProjects()
+    }
+}
+
+return (
+    <div className={styles.container}>
+        {/* Sidebar */}
+        <aside className={styles.sidebar}>
+            <div className={styles.profile} onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}>
+                <div className={styles.avatar}>S</div>
+                <div className={styles.profileInfo}>
+                    <span className={styles.profileName}>syahid arkan</span>
+                    <ChevronDown size={14} />
+                </div>
+                {profileDropdownOpen && (
+                    <div className={styles.profileDropdown} onClick={(e) => e.stopPropagation()}>
+                        <button onClick={() => { setShowSettings(true); setProfileDropdownOpen(false); }}>
+                            <SettingsIcon size={16} /> Settings
+                        </button>
+                        <button onClick={handleLogout}>
+                            <LogOut size={16} /> Logout
+                        </button>
+                    </div>
+                )}
+            </div>
+
+            <nav className={styles.nav}>
+                <button
+                    className={`${styles.navItem} ${sidebarFilter === 'all' ? styles.active : ''}`}
+                    onClick={() => setSidebarFilter('all')}
+                >
+                    <Clock size={18} className={styles.navIcon} /> Recents
+                </button>
+                <button
+                    className={`${styles.navItem} ${sidebarFilter === 'drafts' ? styles.active : ''}`}
+                    onClick={() => setSidebarFilter('drafts')}
+                >
+                    <FileText size={18} className={styles.navIcon} /> Drafts
+                </button>
+                <button
+                    className={`${styles.navItem} ${sidebarFilter === 'starred' ? styles.active : ''}`}
+                    onClick={() => setSidebarFilter('starred')}
+                >
+                    <Star size={18} className={styles.navIcon} /> Starred
+                </button>
+                <button
+                    className={`${styles.navItem} ${sidebarFilter === 'trash' ? styles.active : ''}`}
+                    onClick={() => setSidebarFilter('trash')}
+                >
+                    <Trash2 size={18} className={styles.navIcon} /> Trash
+                </button>
+            </nav>
+        </aside>
+
+        {/* Main Content */}
+        <main className={styles.main}>
+            <header className={styles.header}>
+                <div className={styles.headerTitle}>
+                    <h1>Dashboard</h1>
+                    <p>Manage your projects and designs</p>
+                </div>
+                <div className={styles.headerActions}>
+                    {sidebarFilter === 'trash' && filteredProjects.length > 0 && (
+                        <button className={styles.btnSecondary} onClick={handleEmptyTrash} style={{ color: '#ef4444', borderColor: '#fee2e2' }}>
+                            <Trash2 size={16} /> Empty Trash
+                        </button>
+                    )}
+                    <button className={styles.btnSecondary} onClick={() => setIsModalOpen(true)}>
+                        <Plus size={16} /> New Project
+                    </button>
+                </div>
+            </header>
+
+            <div className={styles.content}>
+                {filteredProjects.length === 0 ? (
+                    <div className={styles.emptyState}>
+                        <Folder size={48} />
+                        <h3>No projects found</h3>
+                        <p>
+                            {sidebarFilter === 'trash'
+                                ? 'Trash is empty'
+                                : sidebarFilter === 'starred'
+                                    ? 'No starred projects yet'
+                                    : 'Create a new project to get started'}
+                        </p>
+                        {sidebarFilter === 'all' && (
+                            <button className={styles.btnPrimary} onClick={() => setIsModalOpen(true)}>
+                                <Plus size={16} /> Create Project
+                            </button>
+                        )}
+                    </div>
+                ) : (
+                    <div className={styles.projectsGrid}>
+                        {filteredProjects.map(project => (
+                            <div key={project.id} className={styles.projectCard} onClick={() => handleCardClick(project)}>
+                                <div className={styles.projectHeader}>
+                                    <div className={styles.projectIcon}>
+                                        {getProjectIcon(project.type)}
+                                    </div>
+                                    <div style={{ position: 'relative' }}>
+                                        <button
+                                            className={styles.projectMenu}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setActiveProjectMenu(activeProjectMenu === project.id ? null : project.id);
+                                            }}
+                                        >
+                                            <MoreVertical size={16} />
+                                        </button>
+
+                                        {activeProjectMenu === project.id && (
+                                            <div className={styles.menuDropdown} ref={menuRef} onClick={(e) => e.stopPropagation()}>
+                                                {!project.deleted ? (
+                                                    <>
+                                                        <button onClick={() => handleRename(project)}>
+                                                            <Edit2 size={14} /> Rename
+                                                        </button>
+                                                        <button onClick={() => handleDuplicate(project)}>
+                                                            <Copy size={14} /> Duplicate
+                                                        </button>
+                                                        <button onClick={() => handleToggleStar(project)}>
+                                                            <Star size={14} fill={project.starred ? "currentColor" : "none"} />
+                                                            {project.starred ? 'Unstar' : 'Star'}
+                                                        </button>
+                                                        <div className={styles.menuDivider}></div>
+                                                        <button onClick={() => handleDelete(project)} className={styles.dangerItem}>
+                                                            <Trash2 size={14} /> Delete
+                                                        </button>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <button onClick={() => handleRestore(project)}>
+                                                            <RotateCcw size={14} /> Restore
+                                                        </button>
+                                                        <div className={styles.menuDivider}></div>
+                                                        <button onClick={() => handleDelete(project)} className={styles.dangerItem}>
+                                                            <Trash2 size={14} /> Delete Forever
+                                                        </button>
+                                                    </>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                                <h3 className={styles.projectTitle}>
+                                    {project.name}
+                                    {project.starred && !project.deleted && <Star size={12} fill="#fbbf24" color="#fbbf24" style={{ marginLeft: 6, display: 'inline' }} />}
+                                </h3>
+                                <div className={styles.projectFooter}>
+                                    <span className={styles.projectType}>{project.type.replace('_', ' ')}</span>
+                                    <span className={styles.projectDate}>
+                                        {new Date(project.updatedAt).toLocaleDateString()}
+                                    </span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </main>
+
+        {/* Modals */}
+        <NewProjectModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onCreate={createProject}
+        />
+
+        {showSettings && (
+            <SettingsModal
+                onClose={() => setShowSettings(false)}
+            />
+        )}
+
+        {/* Rename Modal */}
+        {renameModalOpen && (
+            <div className={styles.modalOverlay} onClick={() => setRenameModalOpen(false)}>
+                <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                    <h3>Rename Project</h3>
+                    <input
+                        type="text"
+                        value={newName}
+                        onChange={(e) => setNewName(e.target.value)}
+                        className={styles.input}
+                        autoFocus
+                    />
+                    <div className={styles.modalActions}>
+                        <button className={styles.btnSecondary} onClick={() => setRenameModalOpen(false)}>Cancel</button>
+                        <button className={styles.btnPrimary} onClick={confirmRename}>Rename</button>
+                    </div>
+                </div>
+            </div>
+        )}
+
+        {/* Delete Modal */}
+        {deleteModalOpen && selectedProject && (
+            <div className={styles.modalOverlay} onClick={() => setDeleteModalOpen(false)}>
+                <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                    <h3>{selectedProject.deleted ? 'Delete Forever?' : 'Move to Trash?'}</h3>
+                    <p>
+                        {selectedProject.deleted
+                            ? `Are you sure you want to permanently delete "${selectedProject.name}"? This action cannot be undone.`
+                            : `Are you sure you want to move "${selectedProject.name}" to trash?`}
+                    </p>
+                    <div className={styles.modalActions}>
+                        <button className={styles.btnSecondary} onClick={() => setDeleteModalOpen(false)}>Cancel</button>
+                        <button
+                            className={styles.btnDanger}
+                            onClick={confirmDelete}
+                        >
+                            {selectedProject.deleted ? 'Delete Forever' : 'Move to Trash'}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
+    </div>
+)
+}

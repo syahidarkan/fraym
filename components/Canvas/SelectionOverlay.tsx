@@ -1,103 +1,96 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useCanvasStore } from '@/store/canvasStore'
 import styles from './SelectionOverlay.module.css'
 
+type ResizeHandle = 'nw' | 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w'
+
 export default function SelectionOverlay() {
-    const { elements, selectedIds, updateElement, moveElement } = useCanvasStore()
-    const [isResizing, setIsResizing] = useState(false)
-    const [isDragging, setIsDragging] = useState(false)
-    const [startPos, setStartPos] = useState({ x: 0, y: 0 })
+    const { selectedIds, elements, updateElement } = useCanvasStore()
+    const [resizing, setResizing] = useState<{ handle: ResizeHandle; startX: number; startY: number; startWidth: number; startHeight: number; startLeft: number; startTop: number } | null>(null)
 
-    if (selectedIds.length === 0) return null
+    React.useEffect(() => {
+        if (!resizing) return
 
-    // For simplicity, we only show resize handles for single selection for now
-    // Multi-selection will just show a bounding box in a future iteration
-    const primaryId = selectedIds[0]
-    const element = elements[primaryId]
+        const handleResizeMove = (e: MouseEvent) => {
+            const dx = e.clientX - resizing.startX
+            const dy = e.clientY - resizing.startY
 
-    if (!element) return null
+            let newWidth = resizing.startWidth
+            let newHeight = resizing.startHeight
+            let newX = resizing.startLeft
+            let newY = resizing.startTop
 
-    const style = {
-        left: `${element.x}px`,
-        top: `${element.y}px`,
-        width: `${element.width}px`,
-        height: `${element.height}px`,
-    }
-
-    const handleMouseDown = (e: React.MouseEvent) => {
-        e.stopPropagation()
-        setIsDragging(true)
-        setStartPos({ x: e.clientX, y: e.clientY })
-    }
-
-    const handleResizeStart = (e: React.MouseEvent, direction: string) => {
-        e.stopPropagation()
-        setIsResizing(true)
-        setStartPos({ x: e.clientX, y: e.clientY })
-
-        const handleMouseMove = (moveEvent: MouseEvent) => {
-            const dx = moveEvent.clientX - startPos.x
-            const dy = moveEvent.clientY - startPos.y
-
-            // Simple resize logic (needs refinement for all directions)
-            if (direction === 'se') {
-                updateElement(primaryId, {
-                    width: Math.max(10, element.width + dx),
-                    height: Math.max(10, element.height + dy)
-                })
+            // Calculate new dimensions based on handle
+            if (resizing.handle.includes('e')) newWidth = Math.max(20, resizing.startWidth + dx)
+            if (resizing.handle.includes('w')) {
+                newWidth = Math.max(20, resizing.startWidth - dx)
+                newX = resizing.startLeft + (resizing.startWidth - newWidth)
             }
-            // Implement other directions...
+            if (resizing.handle.includes('s')) newHeight = Math.max(20, resizing.startHeight + dy)
+            if (resizing.handle.includes('n')) {
+                newHeight = Math.max(20, resizing.startHeight - dy)
+                newY = resizing.startTop + (resizing.startHeight - newHeight)
+            }
+
+            updateElement(selectedIds[0], {
+                width: newWidth,
+                height: newHeight,
+                x: newX,
+                y: newY
+            })
         }
 
-        const handleMouseUp = () => {
-            setIsResizing(false)
-            document.removeEventListener('mousemove', handleMouseMove)
-            document.removeEventListener('mouseup', handleMouseUp)
+        const handleResizeEnd = () => {
+            setResizing(null)
         }
 
-        document.addEventListener('mousemove', handleMouseMove)
-        document.addEventListener('mouseup', handleMouseUp)
+        window.addEventListener('mousemove', handleResizeMove)
+        window.addEventListener('mouseup', handleResizeEnd)
+        return () => {
+            window.removeEventListener('mousemove', handleResizeMove)
+            window.removeEventListener('mouseup', handleResizeEnd)
+        }
+    }, [resizing])
+
+    if (selectedIds.length !== 1) return null
+
+    const element = elements[selectedIds[0]]
+    if (!element || element.locked) return null
+
+    const handleResizeStart = (e: React.MouseEvent, handle: ResizeHandle) => {
+        e.stopPropagation()
+        setResizing({
+            handle,
+            startX: e.clientX,
+            startY: e.clientY,
+            startWidth: element.width,
+            startHeight: element.height,
+            startLeft: element.x,
+            startTop: element.y
+        })
     }
 
-    // Global mouse move for dragging elements
-    useEffect(() => {
-        if (!isDragging) return
-
-        const handleMouseMove = (e: MouseEvent) => {
-            const dx = e.clientX - startPos.x
-            const dy = e.clientY - startPos.y
-            moveElement(primaryId, dx, dy)
-            setStartPos({ x: e.clientX, y: e.clientY })
-        }
-
-        const handleMouseUp = () => {
-            setIsDragging(false)
-        }
-
-        document.addEventListener('mousemove', handleMouseMove)
-        document.addEventListener('mouseup', handleMouseUp)
-
-        return () => {
-            document.removeEventListener('mousemove', handleMouseMove)
-            document.removeEventListener('mouseup', handleMouseUp)
-        }
-    }, [isDragging, startPos, moveElement, primaryId])
+    const handles: ResizeHandle[] = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w']
 
     return (
         <div
             className={styles.overlay}
-            style={style}
-            onMouseDown={handleMouseDown}
+            style={{
+                left: `${element.x}px`,
+                top: `${element.y}px`,
+                width: `${element.width}px`,
+                height: `${element.height}px`,
+            }}
         >
-            <div className={`${styles.handle} ${styles.nw}`} />
-            <div className={`${styles.handle} ${styles.ne}`} />
-            <div className={`${styles.handle} ${styles.sw}`} />
-            <div
-                className={`${styles.handle} ${styles.se}`}
-                onMouseDown={(e) => handleResizeStart(e, 'se')}
-            />
+            {handles.map(handle => (
+                <div
+                    key={handle}
+                    className={`${styles.handle} ${styles[handle]}`}
+                    onMouseDown={(e) => handleResizeStart(e, handle)}
+                />
+            ))}
         </div>
     )
 }

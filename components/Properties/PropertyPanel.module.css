@@ -1,82 +1,192 @@
+/* Professional Property Panel */
 .container {
-    padding: 16px;
+    width: 280px;
+    background: #ffffff;
+    border-left: 1px solid #e4e4e7;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .header {
+    padding: 16px;
+    border-bottom: 1px solid #e4e4e7;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
 }
 
-.header h2 {
-    font-size: 18px;
+.typeLabel {
+    font-size: 14px;
     font-weight: 600;
+    color: #18181b;
+    text-transform: capitalize;
 }
 
 .deleteBtn {
-    background: #dc3545;
-    color: white;
+    padding: 6px;
+    background: transparent;
     border: none;
-    padding: 4px 8px;
     border-radius: 4px;
+    color: #71717a;
     cursor: pointer;
-    font-size: 12px;
+    transition: all 150ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.emptyState {
-    padding: 32px;
-    text-align: center;
-    color: #6c757d;
+.deleteBtn:hover {
+    background: #fee2e2;
+    color: #ef4444;
 }
 
 .section {
-    margin-bottom: 24px;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 16px;
+    padding: 16px;
 }
 
-.section:last-child {
-    border-bottom: none;
-}
-
-.section label {
-    display: block;
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: #18181b;
     font-size: 12px;
     font-weight: 600;
-    color: #6c757d;
-    margin-bottom: 8px;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .row {
     display: flex;
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 12px;
+    margin-bottom: 12px;
 }
 
 .inputGroup {
+    flex: 1;
     display: flex;
     align-items: center;
-    background: var(--background);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 4px 8px;
-    flex: 1;
+    gap: 8px;
 }
 
-.inputGroup span {
+.inputGroup label {
     font-size: 12px;
-    color: #6c757d;
-    margin-right: 8px;
+    color: #71717a;
+    width: 16px;
 }
 
 .inputGroup input {
     width: 100%;
-    font-size: 12px;
-    flex: 1;
+    padding: 6px 8px;
+    border: 1px solid #e4e4e7;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #18181b;
+    background: #ffffff;
+    transition: all 150ms;
 }
 
-button:hover {
-    background: var(--background);
+.inputGroup input:hover {
+    border-color: #d4d4d8;
+}
+
+.inputGroup input:focus {
+    outline: none;
+    border-color: #18181b;
+    box-shadow: 0 0 0 2px rgba(24, 24, 27, 0.05);
+}
+
+.inputGroupFull {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.inputGroupFull label {
+    display: block;
+    font-size: 12px;
+    color: #71717a;
+    margin-bottom: 6px;
+}
+
+.textArea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e4e4e7;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #18181b;
+    background: #ffffff;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.textArea:focus {
+    outline: none;
+    border-color: #18181b;
+}
+
+.colorPicker {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.colorPreview {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    border: 1px solid #e4e4e7;
+}
+
+.colorPicker input[type="text"] {
+    flex: 1;
+    padding: 6px 8px;
+    border: 1px solid #e4e4e7;
+    border-radius: 4px;
+    font-size: 13px;
+    color: #18181b;
+}
+
+.strokeWidth {
+    width: 60px !important;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 8px;
+}
+
+.buttonGroup button {
+    flex: 1;
+    padding: 8px;
+    background: #fafafa;
+    border: 1px solid #e4e4e7;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #18181b;
+    cursor: pointer;
+    transition: all 150ms;
+}
+
+.buttonGroup button:hover {
+    background: #f4f4f5;
+    border-color: #d4d4d8;
+}
+
+.divider {
+    height: 1px;
+    background: #e4e4e7;
+    margin: 0;
+}
+
+.emptyState {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #a1a1aa;
+    font-size: 14px;
 }

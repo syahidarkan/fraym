@@ -1,0 +1,325 @@
+/* Professional Interactive Hero */
+.container {
+    position: relative;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #ffffff;
+    padding: 160px 32px 80px; /* Top padding untuk navbar fixed + horizontal padding */
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Grid Background */
+.gridBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.4;
+    z-index: 0;
+}
+
+.gridLines {
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(to right, #e4e4e7 1px, transparent 1px),
+        linear-gradient(to bottom, #e4e4e7 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* Particle Container */
+.particleContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #18181b;
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: particleBurst 2s ease-out infinite;
+    animation-delay: calc(var(--i) * 0.1s);
+}
+
+@keyframes particleBurst {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0;
+    }
+    20% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(
+            calc(cos(var(--i) * 36deg) * 200px),
+            calc(sin(var(--i) * 36deg) * 200px)
+        ) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Hero Box */
+.heroBox {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 900px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.heroBoxVisible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.title {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: #18181b;
+    letter-spacing: -0.03em;
+}
+
+.titleWord {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: wordSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: var(--delay);
+}
+
+.titleWordVisible {
+    opacity: 1;
+}
+
+@keyframes wordSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.typingText {
+    color: #18181b;
+    font-weight: 700;
+}
+
+.cursor {
+    animation: blink 1s infinite;
+    color: #18181b;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.subtitle {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #71717a;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s;
+}
+
+.subtitleVisible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s;
+}
+
+.buttonsVisible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.primaryButton {
+    position: relative;
+    padding: 14px 28px;
+    background: #18181b;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 150ms;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.primaryButton:hover {
+    background: #27272a;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.buttonGlow {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.primaryButton:hover .buttonGlow {
+    left: 100%;
+}
+
+.secondaryButton {
+    padding: 14px 28px;
+    background: white;
+    color: #18181b;
+    text-decoration: none;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 150ms;
+    cursor: pointer;
+}
+
+.secondaryButton:hover {
+    background: #fafafa;
+    border-color: #d4d4d8;
+}
+
+/* Preview Cards */
+.previewCards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 80px;
+    max-width: 1000px;
+    width: 100%;
+    z-index: 10;
+    position: relative;
+}
+
+.previewCard {
+    background: white;
+    border: 1px solid #e4e4e7;
+    border-radius: 12px;
+    padding: 32px 24px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: var(--card-delay);
+    cursor: pointer;
+}
+
+.previewCardVisible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.previewCard:hover {
+    border-color: #d4d4d8;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+.cardIcon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    background: #f4f4f5;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #18181b;
+    transition: all 0.3s;
+}
+
+.cardIconHover {
+    background: #18181b;
+    color: white;
+    transform: scale(1.1) rotate(5deg);
+}
+
+.cardTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: #18181b;
+    margin-bottom: 8px;
+}
+
+.cardDesc {
+    font-size: 14px;
+    color: #71717a;
+    margin-bottom: 16px;
+}
+
+.cardIndicator {
+    font-size: 24px;
+    color: #d4d4d8;
+    transition: all 0.3s;
+}
+
+.cardIndicatorActive {
+    color: #18181b;
+    transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 120px 20px 60px;
+    }
+
+    .title {
+        font-size: 40px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .primaryButton,
+    .secondaryButton {
+        width: 100%;
+    }
+
+    .previewCards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-top: 60px;
+    }
+}
